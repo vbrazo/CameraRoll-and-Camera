@@ -12,17 +12,16 @@ import AVFoundation
 
 class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var photo : UIImageView!
+    
+    let devices = AVCaptureDevice.devices()
     var captureDevice : AVCaptureDevice?
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
     let stillImageOutput = AVCaptureStillImageOutput()
-    
     var cameraPosition = AVCaptureDevicePosition.Back
-    var photo : UIImageView!
     
-    let screenWidth = UIScreen.mainScreen().bounds.size.width
-    let screenHeight = UIScreen.mainScreen().bounds.size.height
-    let devices = AVCaptureDevice.devices()
+    let screenSize = UIScreen.mainScreen().bounds.size
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +29,9 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
-        if devise(AVCaptureDevicePosition.Back) {
+        if device(AVCaptureDevicePosition.Back) {
             startCamera()
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,15 +47,15 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        previewLayer?.frame = CGRectMake(0, 0, self.screenWidth, self.screenHeight-59)
+        previewLayer?.frame = CGRectMake(0, 0, screenSize.width, self.screenSize.height-59)
         
         self.view.layer.addSublayer(previewLayer!)
         
         captureSession.startRunning()
-    
+
     }
     
-    func devise(type: AVCaptureDevicePosition) -> Bool {
+    func device(type: AVCaptureDevicePosition) -> Bool {
         
         for device in devices {
             if (device.hasMediaType(AVMediaTypeVideo)) {
@@ -78,11 +76,26 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
     }
     
-    func updateDeviceSettings(focusValue : Float, isoValue : Float) {
-        if let device = captureDevice {
-            device.focusMode = AVCaptureFocusMode.ContinuousAutoFocus
-            device.unlockForConfiguration()
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        let focusX = touches.first!.locationInView(self.view).x / screenSize.width
+        let focusY = touches.first!.locationInView(self.view).y / screenSize.height
+
+        if cameraPosition == .Back {
+            if let device = captureDevice {
+                do {
+                    try device.lockForConfiguration()
+                    device.focusPointOfInterest = CGPointMake(focusX, focusY)
+                    device.focusMode = AVCaptureFocusMode.AutoFocus
+                    device.exposurePointOfInterest = CGPointMake(focusX, focusY)
+                    device.exposureMode = AVCaptureExposureMode.ContinuousAutoExposure
+                    device.unlockForConfiguration()
+                } catch let error as NSError {
+                    print(error.code)
+                }
+            }
         }
+        
     }
     
     @IBAction func btnTakePictureClick(sender: AnyObject) {
@@ -117,7 +130,7 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         captureSession.removeInput(currentInput)
         
         cameraPosition = cameraPosition == .Back ? .Front : .Back
-        self.devise(cameraPosition)
+        self.device(cameraPosition)
        
     }
     
