@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  Camera.swift
 //  Camera
 //
 //  Created by Vitor Oliveira on 2/24/16.
@@ -12,6 +12,7 @@ import AVFoundation
 
 class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let global = Global()
     var photo : UIImageView!
     
     let devices = AVCaptureDevice.devices()
@@ -20,8 +21,6 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     var previewLayer : AVCaptureVideoPreviewLayer?
     let stillImageOutput = AVCaptureStillImageOutput()
     var cameraPosition = AVCaptureDevicePosition.Back
-    
-    let screenSize = UIScreen.mainScreen().bounds.size
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +46,7 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        previewLayer?.frame = CGRectMake(0, 0, screenSize.width, self.screenSize.height-59)
+        previewLayer?.frame = CGRectMake(0, 0, self.global.screenWidth, self.global.screenHeight-100)
         
         self.view.layer.addSublayer(previewLayer!)
         
@@ -78,8 +77,8 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        let focusX = touches.first!.locationInView(self.view).x / screenSize.width
-        let focusY = touches.first!.locationInView(self.view).y / screenSize.height
+        let focusX = touches.first!.locationInView(self.view).x / self.global.screenWidth
+        let focusY = touches.first!.locationInView(self.view).y / self.global.screenHeight
 
         if cameraPosition == .Back {
             if let device = captureDevice {
@@ -116,8 +115,10 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                     self.photo = imageView
                     self.captureSession.stopRunning()
                     
-                    self.performSegueWithIdentifier("transPreviewPhoto", sender: nil)
-    
+                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PreviewID") as! Preview
+                    vc.newMediaImage = imageView
+                    self.presentViewController(vc, animated: false, completion: nil)
+                    
                 })
             }
         })
@@ -133,13 +134,10 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         self.device(cameraPosition)
        
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender:AnyObject?){
-        if (segue.identifier=="transPreviewPhoto"){
-            let vc = segue.destinationViewController as! Preview
-            vc.newMediaImage = self.photo
-        }
+        
+    @IBAction func btnLibraryClick(sender: AnyObject) {
+        let view = self.storyboard!.instantiateViewControllerWithIdentifier("LibraryID")
+        self.presentViewController(view, animated: false, completion: nil)
     }
     
 }
-
