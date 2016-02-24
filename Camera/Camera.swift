@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 
-class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class Camera: UIViewController {
     
     let global = Global()
     var photo : UIImageView!
