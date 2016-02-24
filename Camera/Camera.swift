@@ -88,12 +88,9 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     
                     self.photo = imageView
-                    
                     self.captureSession.stopRunning()
                     
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.performSegueWithIdentifier("transPreviewPhoto", sender: nil)
-                    }
+                    self.performSegueWithIdentifier("transPreviewPhoto", sender: nil)
     
                 })
             }
