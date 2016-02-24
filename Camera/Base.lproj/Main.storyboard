@@ -9,7 +9,7 @@
         <!--Camera-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="Camera" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraID" title="Camera" id="BYZ-38-t0r" customClass="Camera" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juB-iF-Qhf">
-                                <rect key="frame" x="0.0" y="541" width="600" height="59"/>
+                                <rect key="frame" x="0.0" y="497" width="600" height="59"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQT-jz-bzF">
                                         <rect key="frame" x="281" y="11" width="38" height="38"/>
@@ -53,26 +53,120 @@
                                     <constraint firstAttribute="trailing" secondItem="drd-7o-qq7" secondAttribute="trailing" constant="17" id="hAm-jF-kqx"/>
                                 </constraints>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yY-jr-dZi">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Library" id="pHe-PO-Ptd">
+                                        <connections>
+                                            <action selector="btnLibraryClick:" destination="BYZ-38-t0r" id="Ggm-7S-cSC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Photo" id="94l-9V-5b3"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3yY-jr-dZi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JOE-eb-kQl"/>
                             <constraint firstItem="juB-iF-Qhf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y1U-mu-nU5"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="juB-iF-Qhf" secondAttribute="bottom" id="aya-0J-BnR"/>
                             <constraint firstAttribute="trailing" secondItem="juB-iF-Qhf" secondAttribute="trailing" id="bLj-eh-9L0"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="juB-iF-Qhf" secondAttribute="bottom" constant="44" id="bPZ-14-siB"/>
+                            <constraint firstAttribute="trailing" secondItem="3yY-jr-dZi" secondAttribute="trailing" id="blz-F4-Fcq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3yY-jr-dZi" secondAttribute="bottom" id="doI-Ry-Pyw"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <segue destination="ByG-nN-zR9" kind="show" identifier="transPreviewPhoto" id="wfi-AP-bu2"/>
-                    </connections>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="k4y-wZ-R1f"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="529" y="670"/>
+            <point key="canvasLocation" x="189" y="573"/>
+        </scene>
+        <!--Library-->
+        <scene sceneID="nyU-Gt-Q3b">
+            <objects>
+                <viewController storyboardIdentifier="LibraryID" title="Library" id="N9d-bN-dYg" customClass="Library" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="G9R-Zy-vgy"/>
+                        <viewControllerLayoutGuide type="bottom" id="yuo-Jq-vmB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vdc-RR-CGZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4s-Ti-xOB">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Library" id="2l9-i6-3af"/>
+                                    <barButtonItem title="Photo" id="lrc-zw-PZS">
+                                        <connections>
+                                            <action selector="btnPhotoClick:" destination="N9d-bN-dYg" id="zBk-tA-OP8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NPt-e1-ooT">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="65R-uL-lV5">
+                                    <size key="itemSize" width="280" height="191"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Photo" id="IEY-IZ-qsS" customClass="Album" customModule="Camera" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="191"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="191"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="exD-Op-LkP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="191"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="exD-Op-LkP" firstAttribute="leading" secondItem="IEY-IZ-qsS" secondAttribute="leading" id="0Vn-ZO-oHz"/>
+                                            <constraint firstAttribute="trailing" secondItem="exD-Op-LkP" secondAttribute="trailing" id="2kT-jn-A4T"/>
+                                            <constraint firstAttribute="bottom" secondItem="exD-Op-LkP" secondAttribute="bottom" id="5Zw-wA-VUt"/>
+                                            <constraint firstItem="exD-Op-LkP" firstAttribute="top" secondItem="IEY-IZ-qsS" secondAttribute="top" id="fTg-Yy-yKO"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="albumPhoto" destination="exD-Op-LkP" id="sfJ-QK-1ji"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="N9d-bN-dYg" id="C6D-2W-BrS"/>
+                                    <outlet property="delegate" destination="N9d-bN-dYg" id="a6o-YP-o1m"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NPt-e1-ooT" firstAttribute="leading" secondItem="Vdc-RR-CGZ" secondAttribute="leading" id="D4r-II-DRk"/>
+                            <constraint firstItem="NPt-e1-ooT" firstAttribute="top" secondItem="Vdc-RR-CGZ" secondAttribute="top" id="IQ7-oI-IZp"/>
+                            <constraint firstItem="yuo-Jq-vmB" firstAttribute="top" secondItem="b4s-Ti-xOB" secondAttribute="bottom" id="VD2-HG-MWp"/>
+                            <constraint firstItem="b4s-Ti-xOB" firstAttribute="leading" secondItem="Vdc-RR-CGZ" secondAttribute="leading" id="b3r-kf-Htg"/>
+                            <constraint firstAttribute="trailing" secondItem="b4s-Ti-xOB" secondAttribute="trailing" id="jwV-O6-UhP"/>
+                            <constraint firstItem="b4s-Ti-xOB" firstAttribute="top" secondItem="NPt-e1-ooT" secondAttribute="bottom" id="qaG-fb-2a5"/>
+                            <constraint firstAttribute="trailing" secondItem="NPt-e1-ooT" secondAttribute="trailing" id="swv-JJ-dZf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="NPt-e1-ooT" id="awe-eL-FVv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jql-4S-7gR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="829" y="573"/>
         </scene>
         <!--Preview Photo-->
         <scene sceneID="8vy-ZW-GG0">
             <objects>
-                <viewController title="Preview Photo" id="ByG-nN-zR9" customClass="Preview" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PreviewID" title="Preview Photo" id="ByG-nN-zR9" customClass="Preview" customModule="Camera" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fis-Ch-0lz"/>
                         <viewControllerLayoutGuide type="bottom" id="uMZ-bn-HQ9"/>
@@ -87,9 +181,9 @@
                                     <constraint firstAttribute="width" constant="41" id="Ze7-5W-vzB"/>
                                     <constraint firstAttribute="height" constant="30" id="vza-Kf-dWy"/>
                                 </constraints>
-                                <state key="normal" title="Voltar"/>
+                                <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="Oq6-mp-SGH"/>
+                                    <action selector="btnBackButton:" destination="ByG-nN-zR9" eventType="touchUpInside" id="DV7-Cj-h9k"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -102,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOY-Fr-RS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1273" y="-87"/>
+            <point key="canvasLocation" x="521" y="1245"/>
         </scene>
     </scenes>
     <resources>

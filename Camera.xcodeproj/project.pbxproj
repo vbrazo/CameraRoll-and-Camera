@@ -11,10 +11,12 @@
 		ED61CBE51C7D599900E76A66 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CBE41C7D599900E76A66 /* Camera.swift */; };
 		ED61CBE81C7D599900E76A66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED61CBE61C7D599900E76A66 /* Main.storyboard */; };
 		ED61CBEA1C7D599900E76A66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED61CBE91C7D599900E76A66 /* Assets.xcassets */; };
-		ED61CBED1C7D599900E76A66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED61CBEB1C7D599900E76A66 /* LaunchScreen.storyboard */; };
 		ED61CBF81C7D599A00E76A66 /* CameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CBF71C7D599A00E76A66 /* CameraTests.swift */; };
 		ED61CC031C7D599A00E76A66 /* CameraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC021C7D599A00E76A66 /* CameraUITests.swift */; };
 		ED61CC111C7D5E0500E76A66 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC101C7D5E0500E76A66 /* Preview.swift */; };
+		ED61CC161C7D88A000E76A66 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC151C7D88A000E76A66 /* Library.swift */; };
+		ED61CC181C7D8B3600E76A66 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC171C7D8B3600E76A66 /* Album.swift */; };
+		ED61CC1C1C7D9D1400E76A66 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC1B1C7D9D1400E76A66 /* Global.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +42,6 @@
 		ED61CBE41C7D599900E76A66 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		ED61CBE71C7D599900E76A66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED61CBE91C7D599900E76A66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ED61CBEC1C7D599900E76A66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED61CBEE1C7D599900E76A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED61CBF31C7D599A00E76A66 /* CameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED61CBF71C7D599A00E76A66 /* CameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTests.swift; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		ED61CC021C7D599A00E76A66 /* CameraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUITests.swift; sourceTree = "<group>"; };
 		ED61CC041C7D599A00E76A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED61CC101C7D5E0500E76A66 /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		ED61CC151C7D88A000E76A66 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		ED61CC171C7D8B3600E76A66 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		ED61CC1B1C7D9D1400E76A66 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +103,11 @@
 		ED61CBE11C7D599900E76A66 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				ED61CC191C7D9CAB00E76A66 /* Classes */,
 				ED61CBE21C7D599900E76A66 /* AppDelegate.swift */,
-				ED61CBE41C7D599900E76A66 /* Camera.swift */,
-				ED61CC101C7D5E0500E76A66 /* Preview.swift */,
-				ED61CBE61C7D599900E76A66 /* Main.storyboard */,
 				ED61CBE91C7D599900E76A66 /* Assets.xcassets */,
-				ED61CBEB1C7D599900E76A66 /* LaunchScreen.storyboard */,
 				ED61CBEE1C7D599900E76A66 /* Info.plist */,
+				ED61CBE61C7D599900E76A66 /* Main.storyboard */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -126,6 +128,18 @@
 				ED61CC041C7D599A00E76A66 /* Info.plist */,
 			);
 			path = CameraUITests;
+			sourceTree = "<group>";
+		};
+		ED61CC191C7D9CAB00E76A66 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ED61CC171C7D8B3600E76A66 /* Album.swift */,
+				ED61CBE41C7D599900E76A66 /* Camera.swift */,
+				ED61CC1B1C7D9D1400E76A66 /* Global.swift */,
+				ED61CC151C7D88A000E76A66 /* Library.swift */,
+				ED61CC101C7D5E0500E76A66 /* Preview.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +245,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED61CBED1C7D599900E76A66 /* LaunchScreen.storyboard in Resources */,
 				ED61CBEA1C7D599900E76A66 /* Assets.xcassets in Resources */,
 				ED61CBE81C7D599900E76A66 /* Main.storyboard in Resources */,
 			);
@@ -259,8 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED61CBE51C7D599900E76A66 /* Camera.swift in Sources */,
+				ED61CC161C7D88A000E76A66 /* Library.swift in Sources */,
+				ED61CC1C1C7D9D1400E76A66 /* Global.swift in Sources */,
 				ED61CC111C7D5E0500E76A66 /* Preview.swift in Sources */,
 				ED61CBE31C7D599900E76A66 /* AppDelegate.swift in Sources */,
+				ED61CC181C7D8B3600E76A66 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,14 +318,6 @@
 				ED61CBE71C7D599900E76A66 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		ED61CBEB1C7D599900E76A66 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ED61CBEC1C7D599900E76A66 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -487,6 +495,7 @@
 				ED61CC091C7D599A00E76A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED61CC0A1C7D599A00E76A66 /* Build configuration list for PBXNativeTarget "CameraTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +504,7 @@
 				ED61CC0C1C7D599A00E76A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED61CC0D1C7D599A00E76A66 /* Build configuration list for PBXNativeTarget "CameraUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +513,7 @@
 				ED61CC0F1C7D599A00E76A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
