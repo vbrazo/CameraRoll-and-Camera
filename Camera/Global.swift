@@ -6,4 +6,11 @@
 //
 //
 
-import Foundation
+import UIKit
+
+class Global : UIViewController {
+    
+    let screenWidth = UIScreen.mainScreen().bounds.size.width
+    let screenHeight = UIScreen.mainScreen().bounds.size.height
+    
+}
