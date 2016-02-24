@@ -32,12 +32,25 @@
                                             <action selector="btnTakePictureClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PFV-hG-3Ta"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drd-7o-qq7">
+                                        <rect key="frame" x="544" y="11" width="39" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="39" id="8fV-g4-DNf"/>
+                                            <constraint firstAttribute="height" constant="39" id="hOv-sA-MaZ"/>
+                                        </constraints>
+                                        <state key="normal" image="camera_change_position"/>
+                                        <connections>
+                                            <action selector="changeCameraPosition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uku-ji-R90"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="sQT-jz-bzF" firstAttribute="centerY" secondItem="juB-iF-Qhf" secondAttribute="centerY" id="Jhz-9R-e6n"/>
                                     <constraint firstItem="sQT-jz-bzF" firstAttribute="centerX" secondItem="juB-iF-Qhf" secondAttribute="centerX" id="Kbc-o7-dNv"/>
+                                    <constraint firstAttribute="bottom" secondItem="drd-7o-qq7" secondAttribute="bottom" constant="9" id="Mjd-e9-wyt"/>
                                     <constraint firstAttribute="height" constant="59" id="Px3-Cy-CWk"/>
+                                    <constraint firstAttribute="trailing" secondItem="drd-7o-qq7" secondAttribute="trailing" constant="17" id="hAm-jF-kqx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -94,5 +107,6 @@
     </scenes>
     <resources>
         <image name="camera-btn" width="80" height="80"/>
+        <image name="camera_change_position" width="512" height="512"/>
     </resources>
 </document>

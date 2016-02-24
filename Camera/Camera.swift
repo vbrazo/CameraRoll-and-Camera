@@ -12,26 +12,56 @@ import AVFoundation
 
 class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var captureDevice : AVCaptureDevice?
     let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
-    var captureDevice : AVCaptureDevice?
     let stillImageOutput = AVCaptureStillImageOutput()
     
+    var cameraPosition = AVCaptureDevicePosition.Back
     var photo : UIImageView!
     
     let screenWidth = UIScreen.mainScreen().bounds.size.width
     let screenHeight = UIScreen.mainScreen().bounds.size.height
+    let devices = AVCaptureDevice.devices()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-        captureSession.sessionPreset = AVCaptureSessionPreset1280x720
+        captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
-        let devices = AVCaptureDevice.devices()
+        if devise(AVCaptureDevicePosition.Back) {
+            startCamera()
+        }
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func startCamera(){
+        
+        if captureSession.canAddOutput(stillImageOutput) {
+            captureSession.addOutput(stillImageOutput)
+        }
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer?.frame = CGRectMake(0, 0, self.screenWidth, self.screenHeight-59)
+        
+        self.view.layer.addSublayer(previewLayer!)
+        
+        captureSession.startRunning()
+    
+    }
+    
+    func devise(type: AVCaptureDevicePosition) -> Bool {
+        
         for device in devices {
             if (device.hasMediaType(AVMediaTypeVideo)) {
-                if(device.position == AVCaptureDevicePosition.Back) {
+                if(device.position == type) {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
                         do {
@@ -39,30 +69,13 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
                         } catch {
                             print("Error")
                         }
-                        
-                        stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-                        
-                        if captureSession.canAddOutput(stillImageOutput) {
-                            captureSession.addOutput(stillImageOutput)
-                        }
-                        
-                        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                        self.view.layer.addSublayer(previewLayer!)
-                        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-                        previewLayer?.frame = CGRectMake(0, 0, self.screenWidth, self.screenHeight-59)
-                        
-                        captureSession.startRunning()
-                        
                     }
                 }
             }
         }
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        return captureDevice != nil
+        
     }
     
     func updateDeviceSettings(focusValue : Float, isoValue : Float) {
@@ -98,6 +111,16 @@ class Camera: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
     }
 
+    @IBAction func changeCameraPosition(sender: AnyObject) {
+        
+        let currentInput = captureSession.inputs[0] as! AVCaptureInput
+        captureSession.removeInput(currentInput)
+        
+        cameraPosition = cameraPosition == .Back ? .Front : .Back
+        self.devise(cameraPosition)
+       
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender:AnyObject?){
         if (segue.identifier=="transPreviewPhoto"){
             let vc = segue.destinationViewController as! Preview
