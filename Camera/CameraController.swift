@@ -18,8 +18,10 @@ public class CameraController {
     
     public var savePhotoToLibrary = true
     
-    private let global = Global()
-
+    public let screenWidth = UIScreen.mainScreen().bounds.size.width
+    public let screenHeight = UIScreen.mainScreen().bounds.size.height
+    public let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
     private let devices = AVCaptureDevice.devices()
     private var captureDevice : AVCaptureDevice?
     private let captureSession = AVCaptureSession()
@@ -60,7 +62,7 @@ public class CameraController {
         
             previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            previewLayer?.frame = CGRectMake(0, 0, self.global.screenWidth, self.global.screenHeight-45)
+            previewLayer?.frame = CGRectMake(0, 0, self.screenWidth, self.screenHeight-45)
         
             view.layer.addSublayer(previewLayer!)
         
@@ -71,8 +73,8 @@ public class CameraController {
     
     public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?, view: UIView) {
         
-        let focusX = touches.first!.locationInView(view).x / self.global.screenWidth
-        let focusY = touches.first!.locationInView(view).y / self.global.screenHeight
+        let focusX = touches.first!.locationInView(view).x / self.screenWidth
+        let focusY = touches.first!.locationInView(view).y / self.screenHeight
         
         if cameraPosition == .Back {
             if let device = captureDevice {
@@ -143,6 +145,12 @@ public class CameraController {
         
         return captureDevice != nil
         
+    }
+    
+    private func imageToBase64(image: UIImage) -> String {
+        let imageData = UIImagePNGRepresentation(image)
+        let base64Encoded = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        return base64Encoded
     }
     
 }
