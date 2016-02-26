@@ -16,6 +16,8 @@ public enum CameraQuality: Int {
 
 public class CameraController {
     
+    public var savePhotoToLibrary = true
+    
     private let global = Global()
 
     private let devices = AVCaptureDevice.devices()
@@ -102,7 +104,9 @@ public class CameraController {
                     let imageView = UIImageView(image: image)
                     imageView.frame = CGRect(x:0, y:0, width:view.frame.width/2, height:view.frame.height/2)
                     
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    if (self.savePhotoToLibrary) {
+                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    }
                     
                     self.captureSession.stopRunning()
                     

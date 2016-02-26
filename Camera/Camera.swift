@@ -17,8 +17,10 @@ class Camera : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Start camera and set initial configuration
         camera.startCamera(self.view)
         camera.cameraQuality = .High
+        camera.savePhotoToLibrary = true
         
         self.view.bringSubviewToFront(cameraOptionsView)
     }
