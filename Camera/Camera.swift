@@ -16,7 +16,10 @@ class Camera : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         camera.startCamera(self.view)
+        camera.cameraQuality = .High
+        
         self.view.bringSubviewToFront(cameraOptionsView)
     }
     

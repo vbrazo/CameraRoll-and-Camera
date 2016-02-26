@@ -1,6 +1,6 @@
 //
-//  CameraPod.swift
-//  CameraPod
+//  CameraController.swift
+//  CameraController
 //
 //  Created by Vitor Oliveira on 2/26/16.
 //
@@ -10,16 +10,41 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 
+public enum CameraQuality: Int {
+    case Low, Medium, High, PresetPhoto
+}
+
 public class CameraController {
     
     private let global = Global()
-    
+
     private let devices = AVCaptureDevice.devices()
     private var captureDevice : AVCaptureDevice?
     private let captureSession = AVCaptureSession()
     private var previewLayer : AVCaptureVideoPreviewLayer?
     private let stillImageOutput = AVCaptureStillImageOutput()
     private var cameraPosition = AVCaptureDevicePosition.Back
+    
+    public var cameraQuality = CameraQuality.High {
+        didSet {
+            var sessionPreset = AVCaptureSessionPresetLow
+            switch (cameraQuality) {
+                case CameraQuality.Low:
+                    sessionPreset = AVCaptureSessionPresetLow
+                case CameraQuality.Medium:
+                    sessionPreset = AVCaptureSessionPresetMedium
+                case CameraQuality.High:
+                    sessionPreset = AVCaptureSessionPresetHigh
+                case CameraQuality.PresetPhoto:
+                    sessionPreset = AVCaptureSessionPresetPhoto
+            }
+            if captureSession.canSetSessionPreset(sessionPreset) {
+                captureSession.beginConfiguration()
+                captureSession.sessionPreset = sessionPreset
+                captureSession.commitConfiguration()
+            }
+        }
+    }
     
     public func startCamera(view: UIView){
         

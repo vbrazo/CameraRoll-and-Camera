@@ -18,6 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yY-jr-dZi">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Library" id="pHe-PO-Ptd">
+                                        <connections>
+                                            <action selector="btnLibraryClick:" destination="BYZ-38-t0r" id="Ggm-7S-cSC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Photo" id="94l-9V-5b3"/>
+                                </items>
+                            </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juB-iF-Qhf">
                                 <rect key="frame" x="0.0" y="497" width="600" height="59"/>
                                 <subviews>
@@ -53,17 +64,6 @@
                                     <constraint firstAttribute="trailing" secondItem="drd-7o-qq7" secondAttribute="trailing" constant="17" id="hAm-jF-kqx"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yY-jr-dZi">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem title="Library" id="pHe-PO-Ptd">
-                                        <connections>
-                                            <action selector="btnLibraryClick:" destination="BYZ-38-t0r" id="Ggm-7S-cSC"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Photo" id="94l-9V-5b3"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>

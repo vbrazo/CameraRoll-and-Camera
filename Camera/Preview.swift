@@ -18,9 +18,9 @@ class Preview: UIViewController {
         super.viewDidLoad()
         
         newMediaImage.frame = CGRectMake(0, 67, self.global.screenWidth, self.global.screenHeight-59)
+      
         self.view.addSubview(newMediaImage)
         self.view.sendSubviewToBack(newMediaImage)
-    
     }
     
     @IBAction func btnBackButton(sender: AnyObject) {
