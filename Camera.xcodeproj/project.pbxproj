@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED3F02501C810A9900AD422A /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3F024F1C810A9900AD422A /* LibraryController.swift */; };
 		ED61CBE31C7D599900E76A66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CBE21C7D599900E76A66 /* AppDelegate.swift */; };
 		ED61CBE51C7D599900E76A66 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CBE41C7D599900E76A66 /* Camera.swift */; };
 		ED61CBE81C7D599900E76A66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED61CBE61C7D599900E76A66 /* Main.storyboard */; };
@@ -16,7 +17,6 @@
 		ED61CC111C7D5E0500E76A66 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC101C7D5E0500E76A66 /* Preview.swift */; };
 		ED61CC161C7D88A000E76A66 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC151C7D88A000E76A66 /* Library.swift */; };
 		ED61CC181C7D8B3600E76A66 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC171C7D8B3600E76A66 /* Album.swift */; };
-		ED61CC1C1C7D9D1400E76A66 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED61CC1B1C7D9D1400E76A66 /* Global.swift */; };
 		ED9AABBC1C80AFFF0065086C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AABBB1C80AFFF0065086C /* CameraController.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED3F024F1C810A9900AD422A /* LibraryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
 		ED61CBDF1C7D599900E76A66 /* Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED61CBE21C7D599900E76A66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED61CBE41C7D599900E76A66 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		ED61CC101C7D5E0500E76A66 /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		ED61CC151C7D88A000E76A66 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		ED61CC171C7D8B3600E76A66 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
-		ED61CC1B1C7D9D1400E76A66 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		ED9AABBB1C80AFFF0065086C /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,8 +138,8 @@
 				ED61CC171C7D8B3600E76A66 /* Album.swift */,
 				ED61CBE41C7D599900E76A66 /* Camera.swift */,
 				ED9AABBB1C80AFFF0065086C /* CameraController.swift */,
-				ED61CC1B1C7D9D1400E76A66 /* Global.swift */,
 				ED61CC151C7D88A000E76A66 /* Library.swift */,
+				ED3F024F1C810A9900AD422A /* LibraryController.swift */,
 				ED61CC101C7D5E0500E76A66 /* Preview.swift */,
 			);
 			name = Classes;
@@ -277,8 +277,8 @@
 				ED9AABBC1C80AFFF0065086C /* CameraController.swift in Sources */,
 				ED61CBE51C7D599900E76A66 /* Camera.swift in Sources */,
 				ED61CC161C7D88A000E76A66 /* Library.swift in Sources */,
-				ED61CC1C1C7D9D1400E76A66 /* Global.swift in Sources */,
 				ED61CC111C7D5E0500E76A66 /* Preview.swift in Sources */,
+				ED3F02501C810A9900AD422A /* LibraryController.swift in Sources */,
 				ED61CBE31C7D599900E76A66 /* AppDelegate.swift in Sources */,
 				ED61CC181C7D8B3600E76A66 /* Album.swift in Sources */,
 			);

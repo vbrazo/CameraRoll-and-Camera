@@ -13,18 +13,16 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let global = Global()
+    let library = LibraryController()
     
-    var photosAsset: PHFetchResult!
     var assetThumbnailSize : CGSize!
-    
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
-        layout.itemSize = CGSize(width: self.global.screenWidth/2, height: self.global.screenWidth/2)
+        layout.itemSize = CGSize(width: self.library.screenWidth/2, height: self.library.screenWidth/2)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
@@ -37,18 +35,6 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         // Dispose of any resources that can be recreated.
     }
     
-    func retrieveNewestImage() {
-        
-        let options = PHFetchOptions()
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let assetResults = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
-        
-        photosAsset = assetResults
-        collectionView.reloadData()
-
-    }
-    
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
@@ -58,19 +44,8 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
             self.assetThumbnailSize = CGSizeMake(cellSize.width, cellSize.height)
         }
         
-        PHPhotoLibrary.requestAuthorization{
-            [weak self](status: PHAuthorizationStatus) in
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                switch status{
-                case .Authorized:
-                    self!.retrieveNewestImage()
-                default:
-                    print("Not authorized")
-                }
-            })
-            
-        }
+        self.library.requestAuth()
+        collectionView.reloadData()
         
     }
 
@@ -81,8 +56,8 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         var count: Int = 0
-        if(self.photosAsset != nil){
-            count = self.photosAsset.count
+        if(self.library.photosAsset != nil){
+            count = self.library.photosAsset.count
         }
         return count
     }
@@ -90,7 +65,7 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Photo", forIndexPath: indexPath) as! Album
-        let asset: PHAsset = self.photosAsset[indexPath.item] as! PHAsset
+        let asset: PHAsset = self.library.photosAsset[indexPath.item] as! PHAsset
         
         PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFill, options: nil, resultHandler: {(result, info)in
             if let image = result {
@@ -102,8 +77,8 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let asset: PHAsset = self.photosAsset[indexPath.item] as! PHAsset
-        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFit, options: nil, resultHandler: {(result, info)in
+        let asset: PHAsset = self.library.photosAsset[indexPath.item] as! PHAsset
+        PHImageManager.defaultManager().requestImageForAsset(asset, targetSize: self.assetThumbnailSize, contentMode: .AspectFit, options: nil, resultHandler: {(result, info) in
             if (info![PHImageResultIsDegradedKey]! as! NSObject==0) {
                 if let image = result {
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PreviewID") as! Preview
@@ -115,11 +90,11 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: self.global.screenWidth/3, height: (self.global.screenWidth/2)/(540/420))
+        return CGSize(width: self.library.screenWidth/3, height: (self.library.screenWidth/2)/(540/420))
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return self.global.sectionInsets
+        return self.library.sectionInsets
     }
     
 }

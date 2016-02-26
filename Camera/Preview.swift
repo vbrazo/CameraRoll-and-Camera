@@ -9,18 +9,18 @@
 import UIKit
 
 class Preview: UIViewController {
-
-    let global = Global()
     
     var newMediaImage : UIImageView!
-
+    let camera = CameraController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newMediaImage.frame = CGRectMake(0, 67, self.global.screenWidth, self.global.screenHeight-59)
+        newMediaImage.frame = CGRectMake(0, 67, self.camera.screenWidth, self.camera.screenHeight-59)
       
         self.view.addSubview(newMediaImage)
         self.view.sendSubviewToBack(newMediaImage)
+        
     }
     
     @IBAction func btnBackButton(sender: AnyObject) {
