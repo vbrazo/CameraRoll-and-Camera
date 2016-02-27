@@ -15,10 +15,10 @@ public class LibraryController {
     public let screenHeight = UIScreen.mainScreen().bounds.size.height
     public let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-    var photosAsset: PHFetchResult!
+    public var photosAsset: PHFetchResult!
     
     public func requestAuth(){
-        PHPhotoLibrary.requestAuthorization{
+        PHPhotoLibrary.requestAuthorization {
             [weak self](status: PHAuthorizationStatus) in
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -37,7 +37,7 @@ public class LibraryController {
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
+    
         let assetResults = PHAsset.fetchAssetsWithMediaType(.Image, options: options)
         
         photosAsset = assetResults

@@ -28,6 +28,17 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         
         collectionView.collectionViewLayout = layout
         
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout{
+            let cellSize = layout.itemSize
+            self.assetThumbnailSize = CGSizeMake(cellSize.width, cellSize.height)
+        }
+        
+        self.library.requestAuth()
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView.reloadData()
+        })
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,20 +46,6 @@ class Library: UIViewController, UICollectionViewDataSource, UICollectionViewDel
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout{
-            let cellSize = layout.itemSize
-            self.assetThumbnailSize = CGSizeMake(cellSize.width, cellSize.height)
-        }
-        
-        self.library.requestAuth()
-        collectionView.reloadData()
-        
-    }
-
     @IBAction func btnPhotoClick(sender: AnyObject) {
         let view = self.storyboard!.instantiateViewControllerWithIdentifier("CameraID")
         self.presentViewController(view, animated: false, completion: nil)
