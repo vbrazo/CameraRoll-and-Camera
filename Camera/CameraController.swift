@@ -7,8 +7,11 @@
 //
 
 import UIKit
-import MobileCoreServices
 import AVFoundation
+
+public enum CameraFlash: Int {
+    case Yes, No, Auto
+}
 
 public enum CameraQuality: Int {
     case Low, Medium, High, PresetPhoto
@@ -29,6 +32,28 @@ public class CameraController {
     private let stillImageOutput = AVCaptureStillImageOutput()
     private var cameraPosition = AVCaptureDevicePosition.Back
     
+    public var flashMode = CameraFlash.No {
+        willSet {
+            for device in AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) {
+                let captureDevice = device as! AVCaptureDevice
+                if (captureDevice.position == AVCaptureDevicePosition.Back) {
+                    let avFlashMode = AVCaptureFlashMode(rawValue: flashMode.rawValue)
+                    if (captureDevice.isFlashModeSupported(avFlashMode!)) {
+                        do {
+                            try captureDevice.lockForConfiguration()
+                            captureSession.beginConfiguration()
+                            captureDevice.flashMode = avFlashMode!
+                            captureSession.commitConfiguration()
+                            captureDevice.unlockForConfiguration()
+                        } catch {
+                            return
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     public var cameraQuality = CameraQuality.High {
         didSet {
             var sessionPreset = AVCaptureSessionPresetLow
@@ -42,11 +67,9 @@ public class CameraController {
                 case CameraQuality.PresetPhoto:
                     sessionPreset = AVCaptureSessionPresetPhoto
             }
-            if captureSession.canSetSessionPreset(sessionPreset) {
-                captureSession.beginConfiguration()
-                captureSession.sessionPreset = sessionPreset
-                captureSession.commitConfiguration()
-            }
+            captureSession.beginConfiguration()
+            captureSession.sessionPreset = sessionPreset
+            captureSession.commitConfiguration()
         }
     }
     
@@ -127,7 +150,6 @@ public class CameraController {
     }
     
     private func device(type: AVCaptureDevicePosition) -> Bool {
-        
         for device in devices {
             if (device.hasMediaType(AVMediaTypeVideo)) {
                 if(device.position == type) {
@@ -144,7 +166,19 @@ public class CameraController {
         }
         
         return captureDevice != nil
-        
+    }
+    
+    public func flashStatus(flashIcon: UIButton){
+        switch self.flashMode{
+            case .Yes:
+                self.flashMode = .No
+                flashIcon.setImage(UIImage(named: "no-flash.png"), forState: UIControlState.Normal)
+            case .No:
+                self.flashMode = .Yes
+                flashIcon.setImage(UIImage(named: "flash.png"), forState: UIControlState.Normal)
+            default:
+                self.flashMode = .Auto
+        }
     }
     
     private func imageToBase64(image: UIImage) -> String {

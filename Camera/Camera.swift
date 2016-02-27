@@ -10,7 +10,9 @@ import UIKit
 
 class Camera : UIViewController {
     
+    @IBOutlet weak var cameraOptionsTopView: UIView!
     @IBOutlet weak var cameraOptionsView: UIView!
+    @IBOutlet weak var flashIcon: UIButton!
     
     let camera = CameraController()
 
@@ -20,9 +22,12 @@ class Camera : UIViewController {
         // Start camera and set initial configuration
         camera.startCamera(self.view)
         camera.cameraQuality = .High
-        camera.savePhotoToLibrary = true
+        camera.savePhotoToLibrary = false
+        camera.flashMode = .No
+        camera.flashStatus(flashIcon)
         
         self.view.bringSubviewToFront(cameraOptionsView)
+        self.view.bringSubviewToFront(cameraOptionsTopView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,11 +46,15 @@ class Camera : UIViewController {
             self.presentViewController(vc, animated: false, completion: nil)
         })
     }
+    
+    @IBAction func changeFlashMode(sender: AnyObject) {
+        camera.flashStatus(flashIcon)
+    }
 
     @IBAction func changeCameraPosition(sender: AnyObject) {
         camera.changeCameraPosition()
     }
-        
+    
     @IBAction func btnLibraryClick(sender: AnyObject) {
         let view = self.storyboard!.instantiateViewControllerWithIdentifier("LibraryID")
         self.presentViewController(view, animated: false, completion: nil)
